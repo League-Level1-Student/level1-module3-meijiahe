@@ -4,6 +4,7 @@
  */
 
 
+import java.applet.AudioClip;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -34,11 +35,10 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 
 	public static void main(String[] args) throws Exception {
 		SwingUtilities.invokeLater(new MagicBox());
-	
-		
-		
 	}
-
+JFrame frame = new JFrame("The Magic Box contains many secrets...");
+JPanel ml=new JPanel();
+MediaPalace nb=new MediaPalace();
 	@Override
 	public void run() {
 		try {
@@ -47,10 +47,13 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 		} catch (Exception w) {
 			System.err.println(w.getMessage());
 		}
+		Dimension d=new Dimension(650,1200);
+		 frame.setSize(d);
+		 frame.add(ml);
+		frame.addMouseListener(this);
 	}
 
 	private void createUI() {
-		JFrame frame = new JFrame("The Magic Box contains many secrets...");
 		frame.add(this);
 		setPreferredSize(new Dimension(backgroundImage.getWidth(), backgroundImage.getHeight()));
 		frame.pack();
@@ -75,7 +78,16 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		int color = backgroundImage.getRGB(e.getX(),e.getY());
+		System.out.println(color);
+		if (color==-3693973) {
+			AudioClip ac =nb.loadSound("moo.wav");
+		ac.play();
+		}
+		if (color==-5582677) {
+			AudioClip ac2 =nb.loadSound("oh.wav");
+		ac2.play();
+		}
 	}
 
 	@Override
